@@ -21,9 +21,55 @@
 
 				<!-- Header -->
 					<header id="header">
-<div id="sfcxg6ram3b1sp8ujnzfpkf2ddutf9a1ggz"></div>
-<script type="text/javascript" src="https://counter9.stat.ovh/private/counter.js?c=xg6ram3b1sp8ujnzfpkf2ddutf9a1ggz&down=async" async></script>
-<noscript><a href="https://www.contadorvisitasgratis.com" title="contador de visitas para web"><img src="https://counter9.stat.ovh/private/contadorvisitasgratis.php?c=xg6ram3b1sp8ujnzfpkf2ddutf9a1ggz" border="0" title="contador de visitas para web" alt="contador de visitas para web"></a></noscript>
+<div id="smart-button-container">
+      <div style="text-align: center;">
+        <div id="paypal-button-container"></div>
+      </div>
+    </div>
+  <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'rect',
+          color: 'gold',
+          layout: 'vertical',
+          label: 'donate',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"Repuestos","amount":{"currency_code":"USD","value":2,"breakdown":{"item_total":{"currency_code":"USD","value":2}}},"items":[{"name":"item name","unit_amount":{"currency_code":"USD","value":2},"quantity":"1","category":"DONATION"}]}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            // Show a success message within this page, e.g.
+            const element = document.getElementById('paypal-button-container');
+            element.innerHTML = '';
+            element.innerHTML = '<h3>Thank you for your payment!</h3>';
+
+            // Or go to another URL:  actions.redirect('thank_you.html');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#paypal-button-container');
+    }
+    initPayPalButton();
+  </script>
+						<div id="sfcxg6ram3b1sp8ujnzfpkf2ddutf9a1ggz"></div>
+						<script type="text/javascript" src="https://counter9.stat.ovh/private/counter.js?c=xg6ram3b1sp8ujnzfpkf2ddutf9a1ggz&down=async" async></script>
+						<noscript><a href="https://www.contadorvisitasgratis.com" title="contador de visitas para web"><img src="https://counter9.stat.ovh/private/contadorvisitasgratis.php?c=xg6ram3b1sp8ujnzfpkf2ddutf9a1ggz" border="0" title="contador de visitas para web" alt="contador de visitas para web"></a></noscript>
 
 						<h1>HV REPUESTOS MULTIMARCAS</h1>
 						<p>CALIDAD &nbsp;&bull;&nbsp; PRECIO &nbsp;&bull;&nbsp; RESPONSABILIDAD</p>
